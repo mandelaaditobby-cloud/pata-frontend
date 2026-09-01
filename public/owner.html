@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PATA OWNER 👑</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
@@ -18,73 +16,40 @@ input{width:100%;padding:12px;border-radius:10px;border:1px solid #333;backgroun
 .stat b{color:#FFD700;font-size:20px;display:block}
 .hidden{display:none}
 .live{color:#0f0}
-</style>
-</head>
-<body>
-<div class="top">
-<h1>PATA 👑 OWNER</h1>
-<p class="sub">BUILT 100% ON PHONE IN THIKA</p>
-<div class="badge">CEO ACCESS ONLY</div>
-</div>
-
-<div id="loginBox" class="card">
-<h3>CEO Login 🔐</h3>
+</style></head><body>
+<div class="top"><h1>PATA 👑 OWNER</h1><p class="sub">BUILT 100% ON PHONE IN THIKA</p><div class="badge">CEO ACCESS ONLY</div></div>
+<div id="loginBox" class="card"><h3>CEO Login 🔐</h3>
 <input id="phone" placeholder="Phone: 0798005771" value="0798005771">
 <input id="pass" type="password" placeholder="Password" value="Pata@2025Owner">
-<button class="btn" onclick="login()">INGIA KAMA OWNER</button>
-<p id="msg" style="color:#f55;margin-top:10px;text-align:center"></p>
-</div>
-
+<button class="btn" onclick="login()">INGIA CEO 👑</button>
+<p id="msg" style="text-align:center;margin-top:10px;color:#f00"></p></div>
 <div id="dash" class="hidden">
-<div class="card">
-<h3>Welcome Boss Mandela! 👑</h3>
-<p class="live">● SYSTEM LIVE - pata-frontend.vercel.app</p>
-<p style="color:#aaa;margin-top:5px">Thika • Owner Mode</p>
-</div>
-
+<div class="card"><h3>Welcome CEO Wycliffe! 👑</h3><p>Live Backend: <span class="live">pata-backend-4y5n.onrender.com</span></p>
+<button class="btn" style="background:#f00;color:#fff" onclick="logout()">Logout</button></div>
 <div class="stats">
-<div class="stat"><b id="users">0</b>Users</div>
-<div class="stat"><b id="rides">0</b>Rides Today</div>
-<div class="stat"><b>Ksh <span id="rev">0</span></b>Revenue</div>
-<div class="stat"><b>100%</b>Phone Built</div>
+<div class="stat"><b id="total">0</b>Users</div>
+<div class="stat"><b id="workers">0</b>Workers</div>
+<div class="stat"><b id="clients">0</b>Clients</div>
+<div class="stat"><b id="jobs">0</b>Jobs</div>
 </div>
-
-<div class="card">
-<h3>Quick Actions</h3>
-<button class="btn" onclick="location.href='/'">🌐 View Main Site</button>
-<button class="btn" style="background:#fff;margin-top:10px" onclick="alert('Backend API: pata-backend.vercel.app\nFrontend: pata-frontend.vercel.app\nStatus: LIVE ✅')">📊 Check System Status</button>
+<div class="card"><h3>All Users</h3><div id="users">Loading...</div>
+<button class="btn" onclick="load()">Refresh 🔄</button></div>
 </div>
-
-<div class="card" style="border-color:#FFD700">
-<h3>🔥 Your Story</h3>
-<p style="color:#ccc;line-height:1.5;margin-top:10px">Built entire PATA empire from a phone in Thika. No laptop. No team. Just pure hustle. This owner.html is your CEO throne.</p>
-</div>
-</div>
-
 <script>
+const API="https://pata-backend-4y5n.onrender.com";
 function login(){
-let p=document.getElementById('phone').value;
-let pw=document.getElementById('pass').value;
-if(p==='0798005771' && pw==='Pata@2025Owner'){
-document.getElementById('loginBox').classList.add('hidden');
-document.getElementById('dash').classList.remove('hidden');
-// fake live data
-let u=127, r=34, rev=8450;
-document.getElementById('users').innerText=u;
-document.getElementById('rides').innerText=r;
-document.getElementById('rev').innerText=rev;
-setInterval(()=>{
-u+=Math.floor(Math.random()*2);
-r+=Math.floor(Math.random()*2);
-rev+=Math.floor(Math.random()*150);
-document.getElementById('users').innerText=u;
-document.getElementById('rides').innerText=r;
-document.getElementById('rev').innerText=rev;
-},3000);
-}else{
-document.getElementById('msg').innerText='Wrong! Use 0798005771 / Pata@2025Owner';
+if(phone.value!=="0798005771"||pass.value!=="Pata@2025Owner"){msg.innerText="Wrong! Use 0798005771 / Pata@2025Owner";return}
+localStorage.setItem("isOwner","1");loginBox.classList.add("hidden");dash.classList.remove("hidden");load()
 }
-}
-</script>
-</body>
-</html>
+function logout(){localStorage.removeItem("isOwner");location.reload()}
+async function load(){
+try{
+let r=await fetch(API+"/users");let d=await r.json();
+let u=d.users||d||[];total.innerText=u.length;
+workers.innerText=u.filter(x=>x.role==="worker"||x.userType==="worker").length;
+clients.innerText=u.filter(x=>x.role==="client"||x.userType==="client").length;
+jobs.innerText="0";
+users.innerHTML=u.map(x=>`<div style="padding:8px;border-bottom:1px solid #333">${x.name||x.fullName||"No name"} - ${x.phone} - ${x.role||x.userType||"user"}</div>`).join("")||"No users";
+}catch(e){users.innerText="Error: "+e.message+" - Backend maybe sleeping, wait 30s"}}
+if(localStorage.getItem("isOwner")){loginBox.classList.add("hidden");dash.classList.remove("hidden");load()}
+</script></body></html>
