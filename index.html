@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>PATA OWNER</title>
-<style>body{font-family:sans-serif;background:#0a0a0a;color:#fff;padding:15px}.card{background:#1a1a1a;padding:18px;border-radius:16px;margin:12px 0}h1{color:#00ff88}.badge{background:linear-gradient(90deg,#00ff88,#00ccff);color:#000;padding:6px 12px;border-radius:20px;font-weight:bold;font-size:12px;display:inline-block;margin:6px 0}button{background:#00ff88;color:#000;padding:12px;border:none;border-radius:10px;font-weight:bold;width:100%}input{padding:12px;width:92%;background:#000;color:#fff;border:1px solid #333;border-radius:10px}</style>
-</head><body>
-<h1>PATA</h1><div class="badge">📱 BUILT 100% ON PHONE IN THIKA 🔥</div><p>Tobias David | OWNER Dashboard | Thika | Termux Edition</p>
+<h1>PATA 👑</h1><div class="badge">📱 BUILT 100% ON PHONE IN THIKA 🔥</div><p>Tobias David | OWNER Dashboard | Thika | Termux Edition</p>
 <div class="card"><h3>Login</h3><input id="phone" value="0798005771"><br><br><input id="pass" type="password" value="Pata@2025Owner!"><br><br><button onclick="login()">LOGIN & LOAD STATS</button></div>
 <div class="card" id="stats">Click LOGIN...</div>
 <script>
 async function login(){
-https://pata-backend.onrender.com/api/auth/login
-let j=await r.json(); localStorage.token=j.token; load();
+ let r=await fetch('https://pata-backend.onrender.com/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone.value,password:pass.value})});
+ let j=await r.json(); if(!j.token){stats.innerHTML='Login failed: '+JSON.stringify(j);return;} localStorage.token=j.token; load();
 }
 async function load(){
-https://pata-backend.onrender.com/api/owner/overview
-let j=await r.json();
-stats.innerHTML=`<h2>LIVE METRICS</h2><p>Users: ${j.metrics.users}</p><p>Merchants: ${j.metrics.merchants}</p><p>Deals: ${j.metrics.activeDeals}</p><p style="color:#00ff88;font-size:12px;margin-top:12px">✅ Backend: localhost:3000 | Frontend: localhost:8080 | DB: Supabase LIVE</p><pre style="font-size:11px;overflow:auto">${JSON.stringify(j,null,2)}</pre>`;
+ let r=await fetch('https://pata-backend.onrender.com/api/owner/overview',{headers:{'Authorization':'Bearer '+localStorage.token}});
+ let j=await r.json();
+ stats.innerHTML=`<h2>LIVE METRICS 👑</h2><p>Users: <span class="metric">${j.metrics?.users||0}</span></p><p>Merchants: <span class="metric">${j.metrics?.merchants||0}</span></p><p>Deals: <span class="metric">${j.metrics?.activeDeals||0}</span></p><p>Withdrawals Pending: <span class="metric">${j.metrics?.pendingWithdrawals||0}</span></p><p>Total Earnings: <span class="metric">KES ${j.metrics?.totalEarnings||0}</span></p><p style="color:#00ff88;font-size:12px;margin-top:12px">✅ Backend: LIVE | Frontend: Vercel | DB: Supabase LIVE</p><pre style="font-size:10px;overflow:auto;background:#000;padding:10px;border-radius:8px">${JSON.stringify(j,null,2)}</pre>`;
 }
 </script></body></html>
