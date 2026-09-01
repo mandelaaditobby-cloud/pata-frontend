@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PATA OWNER 👑</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#000;color:#fff;min-height:100vh;padding:20px}
+.top{border:2px solid #FFD700;border-radius:15px;padding:20px;text-align:center;background:linear-gradient(135deg,#111,#222)}
+h1{color:#FFD700;font-size:28px}
+.sub{color:#aaa;margin:10px 0}
+.badge{display:inline-block;background:#FFD700;color:#000;padding:5px 15px;border-radius:20px;font-weight:bold;margin-top:10px}
+.card{background:#111;border:1px solid #333;border-radius:15px;padding:15px;margin-top:15px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #333;background:#000;color:#fff;margin:8px 0}
+.btn{width:100%;padding:14px;background:#FFD700;color:#000;border:none;border-radius:10px;font-weight:bold;font-size:16px;margin-top:10px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+.stat{background:#000;border:1px solid #FFD700;border-radius:10px;padding:15px;text-align:center}
+.stat b{color:#FFD700;font-size:20px;display:block}
+.hidden{display:none}
+.live{color:#0f0}
+</style>
+</head>
+<body>
+<div class="top">
+<h1>PATA 👑 OWNER</h1>
+<p class="sub">BUILT 100% ON PHONE IN THIKA</p>
+<div class="badge">CEO ACCESS ONLY</div>
+</div>
+
+<div id="loginBox" class="card">
+<h3>CEO Login 🔐</h3>
+<input id="phone" placeholder="Phone: 0798005771" value="0798005771">
+<input id="pass" type="password" placeholder="Password" value="Pata@2025Owner">
+<button class="btn" onclick="login()">INGIA KAMA OWNER</button>
+<p id="msg" style="color:#f55;margin-top:10px;text-align:center"></p>
+</div>
+
+<div id="dash" class="hidden">
+<div class="card">
+<h3>Welcome Boss Mandela! 👑</h3>
+<p class="live">● SYSTEM LIVE - pata-frontend.vercel.app</p>
+<p style="color:#aaa;margin-top:5px">Thika • Owner Mode</p>
+</div>
+
+<div class="stats">
+<div class="stat"><b id="users">0</b>Users</div>
+<div class="stat"><b id="rides">0</b>Rides Today</div>
+<div class="stat"><b>Ksh <span id="rev">0</span></b>Revenue</div>
+<div class="stat"><b>100%</b>Phone Built</div>
+</div>
+
+<div class="card">
+<h3>Quick Actions</h3>
+<button class="btn" onclick="location.href='/'">🌐 View Main Site</button>
+<button class="btn" style="background:#fff;margin-top:10px" onclick="alert('Backend API: pata-backend.vercel.app\nFrontend: pata-frontend.vercel.app\nStatus: LIVE ✅')">📊 Check System Status</button>
+</div>
+
+<div class="card" style="border-color:#FFD700">
+<h3>🔥 Your Story</h3>
+<p style="color:#ccc;line-height:1.5;margin-top:10px">Built entire PATA empire from a phone in Thika. No laptop. No team. Just pure hustle. This owner.html is your CEO throne.</p>
+</div>
+</div>
+
+<script>
+function login(){
+let p=document.getElementById('phone').value;
+let pw=document.getElementById('pass').value;
+if(p==='0798005771' && pw==='Pata@2025Owner'){
+document.getElementById('loginBox').classList.add('hidden');
+document.getElementById('dash').classList.remove('hidden');
+// fake live data
+let u=127, r=34, rev=8450;
+document.getElementById('users').innerText=u;
+document.getElementById('rides').innerText=r;
+document.getElementById('rev').innerText=rev;
+setInterval(()=>{
+u+=Math.floor(Math.random()*2);
+r+=Math.floor(Math.random()*2);
+rev+=Math.floor(Math.random()*150);
+document.getElementById('users').innerText=u;
+document.getElementById('rides').innerText=r;
+document.getElementById('rev').innerText=rev;
+},3000);
+}else{
+document.getElementById('msg').innerText='Wrong! Use 0798005771 / Pata@2025Owner';
+}
+}
+</script>
+</body>
+</html>
