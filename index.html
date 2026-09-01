@@ -7,7 +7,7 @@
 <div class="card" id="stats">Click LOGIN...</div>
 <script>
 async function login(){
-let r=await fetch('http://localhost:3000/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone:phone.value,password:pass.value})});
+https://pata-backend.onrender.com/api/auth/login
 let j=await r.json(); localStorage.token=j.token; load();
 }
 async function load(){
