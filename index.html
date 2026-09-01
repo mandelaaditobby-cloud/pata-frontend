@@ -11,7 +11,7 @@ https://pata-backend.onrender.com/api/auth/login
 let j=await r.json(); localStorage.token=j.token; load();
 }
 async function load(){
-let r=await fetch('http://localhost:3000/api/owner/overview',{headers:{'Authorization':'Bearer '+localStorage.token}});
+https://pata-backend.onrender.com/api/owner/overview
 let j=await r.json();
 stats.innerHTML=`<h2>LIVE METRICS</h2><p>Users: ${j.metrics.users}</p><p>Merchants: ${j.metrics.merchants}</p><p>Deals: ${j.metrics.activeDeals}</p><p style="color:#00ff88;font-size:12px;margin-top:12px">✅ Backend: localhost:3000 | Frontend: localhost:8080 | DB: Supabase LIVE</p><pre style="font-size:11px;overflow:auto">${JSON.stringify(j,null,2)}</pre>`;
 }
